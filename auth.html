@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,51 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+
+    <!-- apple -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+    <!-- pwa -->
+    <link rel="manifest" href="/assets/site.webmanifest">
+
+    <!-- android -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/android-chrome-512x512.png">
+
+    <!-- theme -->
+    <meta name="theme-color" content="#000000">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
+
+        body {
+            font-family: 'Inter', sans-serif;
             background-color: #09090b;
             color: #e2e8f0;
         }
 
-        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
 
         .bg-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
         }
 
         .glow-overlay {
@@ -33,6 +62,7 @@
         }
     </style>
 </head>
+
 <body class="selection:bg-blue-500/30 overflow-hidden antialiased">
     <div id="root"></div>
 
@@ -72,9 +102,8 @@
         );
 
         const Toast = ({ message, type = 'success', onClose }) => (
-            <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 px-5 py-3 rounded-lg shadow-2xl border animate-fade-in z-[200] ${
-                type === 'error' ? 'bg-red-950 border-red-900/50 text-red-200' : 'bg-zinc-900 border-zinc-800 text-zinc-100'
-            }`}>
+            <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 px-5 py-3 rounded-lg shadow-2xl border animate-fade-in z-[200] ${type === 'error' ? 'bg-red-950 border-red-900/50 text-red-200' : 'bg-zinc-900 border-zinc-800 text-zinc-100'
+                }`}>
                 <Icon name={type === 'error' ? "alert-circle" : "check"} size={16} className={type === 'error' ? 'text-red-400' : 'text-emerald-400'} />
                 <span className="text-sm font-medium">{message}</span>
                 <button onClick={onClose} className="ml-2 text-zinc-500 hover:text-zinc-200"><Icon name="x" size={14} /></button>
@@ -101,7 +130,7 @@
             const handleSubmit = async (e) => {
                 e.preventDefault();
                 setLoading(true);
-                
+
                 const formData = new FormData(e.target);
                 const payload = Object.fromEntries(formData.entries());
                 const endpoint = mode === 'login' ? '/auth/login' : '/auth/register';
@@ -112,9 +141,9 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
-                    
+
                     const data = await res.json();
-                    
+
                     if (res.ok && data.token) {
                         localStorage.setItem('token', data.token);
                         showToast(mode === 'login' ? 'Welcome back!' : 'Account created successfully!');
@@ -136,7 +165,7 @@
 
                     <div className="w-full max-w-[400px] relative z-10 animate-fade-in">
                         <Logo />
-                        
+
                         <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-8 shadow-2xl">
                             <div className="mb-8">
                                 <h2 className="text-xl font-semibold text-white tracking-tight">
@@ -151,24 +180,24 @@
                                 {mode === 'register' && (
                                     <div className="space-y-1.5">
                                         <label className="text-xs font-medium text-zinc-400">Full Name</label>
-                                        <input 
-                                            name="full_name" 
-                                            type="text" 
-                                            placeholder="Linus Torvalds" 
-                                            required 
-                                            className="w-full bg-[#09090b] border border-zinc-800 rounded-md px-3 py-2 text-sm text-zinc-200 outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-700" 
+                                        <input
+                                            name="full_name"
+                                            type="text"
+                                            placeholder="Linus Torvalds"
+                                            required
+                                            className="w-full bg-[#09090b] border border-zinc-800 rounded-md px-3 py-2 text-sm text-zinc-200 outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-700"
                                         />
                                     </div>
                                 )}
-                                
+
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-medium text-zinc-400">Email Address</label>
-                                    <input 
-                                        name="email" 
-                                        type="email" 
-                                        placeholder="name@company.com" 
-                                        required 
-                                        className="w-full bg-[#09090b] border border-zinc-800 rounded-md px-3 py-2 text-sm text-zinc-200 outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-700" 
+                                    <input
+                                        name="email"
+                                        type="email"
+                                        placeholder="name@company.com"
+                                        required
+                                        className="w-full bg-[#09090b] border border-zinc-800 rounded-md px-3 py-2 text-sm text-zinc-200 outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-700"
                                     />
                                 </div>
 
@@ -179,16 +208,16 @@
                                             <a href="#" className="text-[11px] text-blue-500 hover:text-blue-400 transition">Forgot?</a>
                                         )}
                                     </div>
-                                    <input 
-                                        name="password" 
-                                        type="password" 
-                                        placeholder="••••••••" 
-                                        required 
-                                        className="w-full bg-[#09090b] border border-zinc-800 rounded-md px-3 py-2 text-sm text-zinc-200 outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-700" 
+                                    <input
+                                        name="password"
+                                        type="password"
+                                        placeholder="••••••••"
+                                        required
+                                        className="w-full bg-[#09090b] border border-zinc-800 rounded-md px-3 py-2 text-sm text-zinc-200 outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-700"
                                     />
                                 </div>
 
-                                <button 
+                                <button
                                     disabled={loading}
                                     className="w-full mt-2 py-2.5 bg-white text-black rounded-md text-sm font-semibold hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
@@ -200,7 +229,7 @@
                             <div className="mt-8 pt-6 border-t border-zinc-900 text-center">
                                 <p className="text-sm text-zinc-500">
                                     {mode === 'login' ? "Don't have an account?" : "Already have an account?"}{' '}
-                                    <button 
+                                    <button
                                         onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
                                         className="text-blue-500 font-medium hover:text-blue-400 transition"
                                     >
@@ -226,4 +255,5 @@
         root.render(<Auth />);
     </script>
 </body>
+
 </html>

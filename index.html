@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,39 +11,95 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="/assets/js/api.js"></script>
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+
+    <!-- apple -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+    <!-- pwa -->
+    <link rel="manifest" href="/assets/site.webmanifest">
+
+    <!-- android -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/android-chrome-512x512.png">
+
+    <!-- theme -->
+    <meta name="theme-color" content="#000000">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
+
+        body {
+            font-family: 'Inter', sans-serif;
             background-color: #09090b;
             color: #e2e8f0;
         }
 
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
 
-        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        .animate-slide-up { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         /* Subtle grid background for the hero */
         .bg-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
         /* Custom scrollbar matching dashboard */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525b;
+        }
     </style>
 </head>
+
 <body class="selection:bg-blue-500/30 overflow-x-hidden antialiased">
     <div id="root"></div>
 
@@ -90,7 +147,7 @@
                 <svg width={totalWidth} height="20" viewBox={`0 0 ${totalWidth} 20`} xmlns="http://www.w3.org/2000/svg" className="rounded shadow-sm">
                     <rect width={labelWidth} height="20" fill="#27272a" />
                     <rect x={labelWidth} width={countWidth} height="20" fill="#3b82f6" />
-                    
+
                     <text x={labelWidth / 2} y="14" textAnchor="middle" fontFamily="'Inter', sans-serif" fontSize="11" fontWeight="500" fill="#e2e8f0">
                         {label}
                     </text>
@@ -176,7 +233,7 @@
                     {/* Hero Section */}
                     <main className="pt-32 pb-24 px-6 relative z-10 flex-1">
                         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_500px] gap-12 lg:gap-20 items-center">
-                            
+
                             {/* Hero Text */}
                             <div className="space-y-6 animate-slide-up">
                                 <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-medium">
@@ -184,12 +241,12 @@
                                     PingCounter v1.4 available
                                 </div>
                                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-slate-100 tracking-tight leading-[1.1]">
-                                    The Modern <br/>Metric Engine.
+                                    The Modern <br />Metric Engine.
                                 </h1>
                                 <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-lg">
                                     High-performance event ingestion, real-time analytics, and dynamic SVG badges. Track anything with a simple URL. No database setup required.
                                 </p>
-                                
+
                                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-2">
                                     <a href={isAuthenticated ? "dashboard.html" : "auth.html"} className="w-full sm:w-auto px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-sm font-medium transition shadow-sm text-center">
                                         Start Tracking — Free
@@ -198,7 +255,7 @@
                                         <Icon name="book" size={16} /> Read the Docs
                                     </a>
                                 </div>
-                                
+
                                 <div className="flex items-center gap-4 pt-8 text-zinc-600">
                                     <span className="text-xs font-medium uppercase tracking-wider text-zinc-500">Integrates with</span>
                                     <Icon name="github" size={20} className="hover:text-zinc-400 transition-colors cursor-pointer" />
@@ -214,12 +271,11 @@
                                     {/* IDE Header */}
                                     <div className="flex items-center bg-zinc-900/50 border-b border-zinc-800 overflow-x-auto">
                                         {codeSnippets.map((snippet, idx) => (
-                                            <button 
+                                            <button
                                                 key={idx}
                                                 onClick={() => setActiveCodeTab(idx)}
-                                                className={`px-4 py-2.5 text-xs font-mono transition-colors flex items-center gap-2 border-r border-zinc-800 shrink-0 ${
-                                                    activeCodeTab === idx ? `bg-[#09090b] text-blue-400` : `text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/30`
-                                                }`}
+                                                className={`px-4 py-2.5 text-xs font-mono transition-colors flex items-center gap-2 border-r border-zinc-800 shrink-0 ${activeCodeTab === idx ? `bg-[#09090b] text-blue-400` : `text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/30`
+                                                    }`}
                                             >
                                                 <Icon name={snippet.icon} size={14} />
                                                 {snippet.name}
@@ -257,12 +313,12 @@
 
                             <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-6 sm:p-8">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                                    
+
                                     <div className="space-y-6">
                                         <div>
                                             <label className="block text-xs font-medium text-zinc-400 mb-2">1. Customize Event Label</label>
-                                            <input 
-                                                type="text" 
+                                            <input
+                                                type="text"
                                                 value={demoLabel}
                                                 onChange={(e) => setDemoLabel(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))}
                                                 maxLength="20"
@@ -271,7 +327,7 @@
                                         </div>
                                         <div>
                                             <label className="block text-xs font-medium text-zinc-400 mb-2">2. Trigger Network Request</label>
-                                            <button 
+                                            <button
                                                 onClick={handleDemoPing}
                                                 className="w-full py-2 bg-zinc-800 hover:bg-zinc-700 text-slate-200 rounded-md text-sm font-medium transition flex items-center justify-center gap-2 border border-zinc-700 active:scale-[0.98]"
                                             >
@@ -391,4 +447,5 @@
         root.render(<LandingPage />);
     </script>
 </body>
+
 </html>
