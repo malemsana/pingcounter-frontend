@@ -100,7 +100,7 @@
 
             useEffect(() => {
                 if (!api.getToken()) {
-                    window.location.href = 'auth.html';
+                    window.location.href = '/auth';
                 } else {
                     fetchData();
                 }
@@ -121,7 +121,7 @@
 
             const handleLogout = () => {
                 api.setToken(null);
-                window.location.href = 'auth.html';
+                window.location.href = '/auth';
             };
 
             const showToast = (message, type = 'success') => {
@@ -161,7 +161,7 @@
                             <div className="max-w-7xl mx-auto">
                                 <ProjectList 
                                     projects={projects} 
-                                    onSelect={(p) => window.location.href = `project.html?name=${p.project_name}`} 
+                                    onSelect={(p) => window.location.href = `/project?name=${p.project_name}`} 
                                     onCreateClick={() => setShowCreateModal(true)} 
                                 />
                             </div>

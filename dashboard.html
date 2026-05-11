@@ -227,7 +227,7 @@
                         name="Keys"
                         icon="key"
                         active={false}
-                        onClick={() => window.location.href = 'keys.html'}
+                        onClick={() => window.location.href = '/keys'}
                     />
                     <SidebarItem
                         name="Settings"
@@ -1446,7 +1446,7 @@
 
             useEffect(() => {
                 if (token) fetchInitialData();
-                else window.location.href = 'auth.html';
+                else window.location.href = '/auth';
             }, [token]);
 
             // Auto Refresh mechanism
@@ -1491,7 +1491,7 @@
                 localStorage.removeItem('token');
                 setToken('');
                 setUser(null);
-                window.location.href = 'auth.html';
+                window.location.href = '/auth';
             };
 
             const enterAccount = async () => {
