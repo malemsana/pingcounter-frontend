@@ -86,6 +86,7 @@
                         <li><a href="#ingestion" class="block px-2 py-1.5 text-sm text-zinc-400 hover:text-blue-400 transition">Ingestion (Pings)</a></li>
                         <li><a href="#badges" class="block px-2 py-1.5 text-sm text-zinc-400 hover:text-blue-400 transition">Visual Badges</a></li>
                         <li><a href="#retrieval" class="block px-2 py-1.5 text-sm text-zinc-400 hover:text-blue-400 transition">Data Retrieval</a></li>
+                        <li><a href="#history" class="block px-2 py-1.5 text-sm text-zinc-400 hover:text-blue-400 transition">Historical Stats</a></li>
                     </ul>
                 </div>
                 <div class="space-y-3">
@@ -125,6 +126,24 @@
                         <i data-lucide="layout" class="text-purple-400 w-6 h-6 mb-4"></i>
                         <h4 class="text-white font-bold mb-2">Visual-First</h4>
                         <p class="text-xs text-zinc-500 leading-relaxed">Beautiful SVG badges built-in, with zero-config embedding for any web environment.</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 p-8 bg-blue-500/5 border border-blue-500/10 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute -right-8 -top-8 text-blue-500/5 rotate-12 group-hover:rotate-0 transition-transform duration-700">
+                        <i data-lucide="server" size="160"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
+                            <i data-lucide="globe" class="text-blue-400 w-5 h-5"></i>
+                            API Base URL
+                        </h3>
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+                            <code class="px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-blue-400 font-mono text-sm shadow-inner select-all">
+                                https://pingcounter.onrender.com
+                            </code>
+                            <p class="text-xs text-zinc-500 italic">All requests should be sent to this base endpoint unless running a local instance.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -231,16 +250,15 @@
                         <div class="space-y-6">
                             <h5 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Integration Methods</h5>
                             
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                                 <!-- JS Fetch -->
                                 <div class="space-y-3">
-                                    <div class="text-[11px] font-semibold text-zinc-300">JavaScript Fetch (Modern Web)</div>
-                                    <div class="bg-zinc-900 rounded-xl p-4 font-mono text-[10px] text-zinc-400">
-                                        <div class="text-zinc-600 mb-2">// Trigger on button click</div>
+                                    <div class="text-[11px] font-semibold text-zinc-300">JavaScript Fetch</div>
+                                    <div class="bg-zinc-900 rounded-xl p-4 font-mono text-[10px] text-zinc-400 border border-zinc-800/50">
                                         <code class="block text-blue-400">
 fetch('https://pingcounter.onrender.com/p/pc_123/site/signup', {
   method: 'POST',
-  mode: 'no-cors' // Passive tracking
+  mode: 'no-cors'
 });
                                         </code>
                                     </div>
@@ -249,11 +267,20 @@ fetch('https://pingcounter.onrender.com/p/pc_123/site/signup', {
                                 <!-- Image Pixel -->
                                 <div class="space-y-3">
                                     <div class="text-[11px] font-semibold text-zinc-300">Image Pixel (Zero JS)</div>
-                                    <div class="bg-zinc-900 rounded-xl p-4 font-mono text-[10px] text-zinc-400">
-                                        <div class="text-zinc-600 mb-2">&lt;!-- Tracks on page load --&gt;</div>
+                                    <div class="bg-zinc-900 rounded-xl p-4 font-mono text-[10px] text-zinc-400 border border-zinc-800/50">
                                         <code class="block text-emerald-400">
-&lt;img src="https://pingcounter.onrender.com/p/pc_123/site/page-view" 
+&lt;img src="https://pingcounter.onrender.com/p/pc_123/site/view" 
      width="1" height="1" style="display:none" /&gt;
+                                        </code>
+                                    </div>
+                                </div>
+
+                                <!-- Shell -->
+                                <div class="space-y-3">
+                                    <div class="text-[11px] font-semibold text-zinc-300">Shell (cURL)</div>
+                                    <div class="bg-zinc-900 rounded-xl p-4 font-mono text-[10px] text-zinc-400 border border-zinc-800/50">
+                                        <code class="block text-purple-400">
+curl -X POST "https://pingcounter.onrender.com/p/pc_123/site/test"
                                         </code>
                                     </div>
                                 </div>
@@ -362,7 +389,14 @@ window.addEventListener('visibilitychange', () => {
                             <code class="text-sm text-zinc-300 font-mono">/api/v1/data/:api_key/:project/:event</code>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 space-y-6">
+                        <div class="space-y-3">
+                            <h5 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest px-2">Query Parameters</h5>
+                            <div class="flex justify-between items-center text-sm border-b border-zinc-800/50 pb-2 px-2">
+                                <span class="font-mono text-zinc-400">days</span>
+                                <span class="text-zinc-500 italic">Optional. Number of days to return (default: 30)</span>
+                            </div>
+                        </div>
                         <div class="bg-zinc-900 rounded-xl p-6 font-mono text-[11px] text-zinc-400 overflow-x-auto">
 <pre class="text-emerald-400">{
   "project": "my-site",
@@ -379,6 +413,65 @@ window.addEventListener('visibilitychange', () => {
                         </div>
                     </div>
                 </div>
+
+                <!-- Historical Stats Section -->
+                <div id="history" class="bg-zinc-950 rounded-2xl border border-zinc-800 overflow-hidden mt-8 scroll-mt-24">
+                    <div class="p-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/30">
+                        <div class="flex items-center gap-3">
+                            <span class="endpoint-badge get">GET</span>
+                            <code class="text-sm text-zinc-300 font-mono">/api/v1/history/:api_key/:project/:event</code>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <div class="space-y-4">
+                            <h4 class="text-white font-semibold flex items-center gap-2">
+                                <i data-lucide="bar-chart-3" class="w-4 h-4 text-emerald-400"></i>
+                                Time-Series Distribution
+                            </h4>
+                            <p class="text-sm text-zinc-500 leading-relaxed">
+                                A specialized endpoint optimized for analytics. It returns an array of daily aggregates, 
+                                ideal for populating line charts, bar graphs, or activity maps.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-3">
+                                <h5 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest px-1">Shell Example</h5>
+                                <div class="bg-zinc-900 rounded-xl p-4 font-mono text-[10px] text-zinc-400 border border-zinc-800/50">
+                                    <code class="block text-blue-400">
+curl -X GET "https://pingcounter.onrender.com/api/v1/history/YOUR_KEY/project/event?days=7"
+                                    </code>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <h5 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest px-1">JSON Response</h5>
+                                <div class="bg-zinc-900 rounded-xl p-4 font-mono text-[10px] text-emerald-400 border border-zinc-800/50 overflow-x-auto">
+<pre>{
+  "history": [
+    { "date": "2026-05-13", "count": 412 },
+    { "date": "2026-05-14", "count": 528 }
+  ]
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                            <h5 class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3">Schema Breakdown</h5>
+                            <ul class="space-y-2">
+                                <li class="flex items-center justify-between text-[11px] border-b border-zinc-800 pb-2">
+                                    <span class="font-mono text-zinc-300">date</span>
+                                    <span class="text-zinc-500 italic">ISO 8601 String (YYYY-MM-DD)</span>
+                                </li>
+                                <li class="flex items-center justify-between text-[11px]">
+                                    <span class="font-mono text-zinc-300">count</span>
+                                    <span class="text-zinc-500 italic">Total hits recorded on that day</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </section>
 
             <!-- Workflows Section -->
